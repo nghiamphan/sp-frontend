@@ -1,14 +1,19 @@
 import { Delete, Edit } from "@mui/icons-material"
 import { Button, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material"
-import { useDispatch } from "react-redux"
-import { deleteStaff } from "../../reducers/staffReducer"
-import staffService from "../../services/staffService"
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { deleteStaff, getStaffs } from "../../reducers/staffReducer"
 
-const Staffs = ({ staffs }) => {
+const Staffs = () => {
     const dispatch = useDispatch()
+    const staffs = useSelector(state => state.staffs)
+
+    useEffect(() => {
+        dispatch(getStaffs())
+    }, [dispatch])
+
     const onDelete = (staffId) => {
-        staffService.deleteStaff(staffId).then(() =>
-            dispatch(deleteStaff(staffId)))
+        dispatch(deleteStaff(staffId))
     }
 
     return (

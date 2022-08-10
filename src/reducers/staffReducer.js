@@ -47,10 +47,23 @@ export const getStaffs = () => {
     }
 }
 
+export const createStaff = (staffObject) => {
+    return async dispatch => {
+        const newStaff = await staffService.createStaff(staffObject)
+        dispatch({
+            type: CREATE_STAFF,
+            data: newStaff
+        })
+    }
+}
+
 export const deleteStaff = (id) => {
-    return {
-        type: DELETE_STAFF,
-        data: { id }
+    return async dispatch => {
+        await staffService.deleteStaff(id)
+        dispatch({
+            type: DELETE_STAFF,
+            data: { id }
+        })
     }
 }
 
