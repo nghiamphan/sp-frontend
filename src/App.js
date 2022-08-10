@@ -1,8 +1,8 @@
-import { Add } from "@mui/icons-material";
 import { Button, FormControl, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import CreateStaff from "./components/CreateStaff";
 import Staffs from './components/staff/Staffs';
 import { createStaff, getStaffs } from './reducers/staffReducer';
 
@@ -17,10 +17,6 @@ const App = () => {
     }
 
     const [formValues, setFormValues] = useState(defaultValues)
-
-    useEffect(() => {
-        dispatch(getStaffs())
-    }, [dispatch])
 
     const onCreate = event => {
         event.preventDefault()
@@ -41,29 +37,30 @@ const App = () => {
     }
 
     return (
-        // <BrowserRouter>
-        //     <div>
-        //         <Link to="/">Home</Link>
-        //         <Link to="/staffs">Staffs</Link>
-        //     </div>
+        <BrowserRouter>
+            <div>
+                <Link to="/">Home</Link>
+                <Link to="/staffs">Staffs</Link>
+            </div>
 
-        //     <Routes>
-        //         <Route path="/staffs" element={<Staffs />} />
-        //     </Routes>
-        // </BrowserRouter>
+            <Routes>
+                <Route path="/staffs" element={<Staffs />} />
+                <Route path="/staffs/create-staff-form" element={<CreateStaff />} />
+            </Routes>
+        </BrowserRouter>
         
-        <div className="App">
-            <Staffs staffs={staffs} />
+        // <div className="App">
+        //     <Staffs staffs={staffs} />
 
-            <form onSubmit={onCreate}>
-                <FormControl>
-                    <TextField label="Full Name" name="fullName" value={formValues.fullName} onChange={handleInputChange} style={style} />
-                    <TextField label="Email" type="email" name="email" value={formValues.email} onChange={handleInputChange} style={style} />
-                    <TextField label="Join Date" type="date" name="joinDate" value={formValues.joinDate} onChange={handleInputChange} style={style} />
-                    <Button type="submit" variant="contained">Submit</Button>
-                </FormControl>
-            </form>
-        </div>
+        //     <form onSubmit={onCreate}>
+        //         <FormControl>
+        //             <TextField label="Full Name" name="fullName" value={formValues.fullName} onChange={handleInputChange} style={style} />
+        //             <TextField label="Email" type="email" name="email" value={formValues.email} onChange={handleInputChange} style={style} />
+        //             <TextField label="Join Date" type="date" name="joinDate" value={formValues.joinDate} onChange={handleInputChange} style={style} />
+        //             <Button type="submit" variant="contained">Submit</Button>
+        //         </FormControl>
+        //     </form>
+        // </div>
     );
 }
 
