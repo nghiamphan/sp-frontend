@@ -18,13 +18,18 @@ const Staffs = () => {
         dispatch(deleteStaff(staffId))
     }
 
+    const style = {
+        margin: 8
+    }
+
     return (
         <>
-            <Table sx={{ width: 650 }}>
+            <Table sx={{ width: 750 }} style={style}>
                 <TableHead>
                     <TableRow>
                         <TableCell>ID</TableCell>
                         <TableCell>Full Name</TableCell>
+                        <TableCell>Email</TableCell>
                         <TableCell>Join Date</TableCell>
                         <TableCell>Action</TableCell>
                     </TableRow>
@@ -34,11 +39,12 @@ const Staffs = () => {
                         <TableRow key={staff.staffId}>
                             <TableCell>{staff.staffId}</TableCell>
                             <TableCell>{staff.fullName}</TableCell>
+                            <TableCell>{staff.email}</TableCell>
                             <TableCell>{staff.joinDate}</TableCell>
                             <TableCell>
-                                <Button size="small" variant="outlined" startIcon={<Edit />}>Update</Button>
+                                <Button size="small" variant="outlined" startIcon={<Edit />} onClick={() => navigate(`/staffs/update/${staff.staffId}`)}  style={style}>Update</Button>
                                 <Button size="small" variant="outlined" startIcon={<Delete />}
-                                    onClick={() => onDelete(staff.staffId)}>
+                                    onClick={() => onDelete(staff.staffId)}  style={style}>
                                     Delete
                                 </Button>
                             </TableCell>
@@ -46,7 +52,7 @@ const Staffs = () => {
                 </TableBody>
 
             </Table >
-            <Button variant="contained" startIcon={<Add />} onClick={() => navigate("/staffs/create-staff-form")}>Add new staff</Button>
+            <Button variant="contained" startIcon={<Add />} onClick={() => navigate("/staffs/create-staff-form")}  style={style}>Add new staff</Button>
         </>
     )
 }

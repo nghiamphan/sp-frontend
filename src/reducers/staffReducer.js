@@ -42,7 +42,7 @@ export const getStaffs = () => {
         const staffs = await staffService.getStaffs()
         dispatch({
             type: GET_STAFFS,
-            data: staffs
+            data: staffs.sort((x, y) => Number(x.staffId.substr(1)) > Number(y.staffId.substr(1)) ? 1: -1)
         })
     }
 }
@@ -53,6 +53,16 @@ export const createStaff = (staffObject) => {
         dispatch({
             type: CREATE_STAFF,
             data: newStaff
+        })
+    }
+}
+
+export const updateStaff = (id, staffObject) => {
+    return async dispatch => {
+        const updatedStaff = await staffService.updateStaff(id, staffObject)
+        dispatch({
+            type: UPDATE_STAFF,
+            data: updatedStaff
         })
     }
 }

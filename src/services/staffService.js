@@ -11,6 +11,11 @@ const getStaffs = async () => {
     return response.data
 }
 
+const getStaff = async (id) => {
+    const response = await axios.get(`${baseUrl}/${id}`, config)
+    return response.data
+}
+
 const createStaff = async (staffObject) => {
     const response = await axios.post(baseUrl, staffObject, config)
     return response.data
@@ -28,6 +33,7 @@ const deleteStaff = async (id) => {
 
 const staffService = {
     getStaffs,
+    getStaff,
     createStaff,
     updateStaff,
     deleteStaff
